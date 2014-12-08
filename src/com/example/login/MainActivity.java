@@ -1,39 +1,48 @@
-package com.example.amybroadcastreceiver1;
+package com.example.login;
 
 import java.util.regex.Matcher;
-
 import java.util.regex.Pattern;
-import android.os.Bundle;
-import android.os.Handler;
-import android.annotation.SuppressLint;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
+import android.os.Handler;
 import android.telephony.SmsMessage;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-@SuppressLint("HandlerLeak")
 public class MainActivity extends Activity {
+
 	private BroadcastReceiver smsReceiver;
 	private IntentFilter filter2;
 	private Handler handler;
-	private EditText et;
+	private EditText editCaptcha;
+	private EditText editPhone;
+	private Button buttonLogin;
+	private Button buttonCaptcha;
 	private String strContent;
 	private String patternCoder = "(?<!\\d)\\d{6}(?!\\d)";
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		et = (EditText) findViewById(R.id.et);
+		editCaptcha = (EditText) findViewById(R.id.login_editcaptcha);
+		editPhone = (EditText) findViewById(R.id.login_editphone);
+		buttonLogin = (Button) findViewById(R.id.login_loginbutton);
+		buttonCaptcha = (Button) findViewById(R.id.login_buttoncaptcha);
 		handler = new Handler() {
 			public void handleMessage(android.os.Message msg) {
-				et.setText(strContent);
+				editCaptcha.setText(strContent);
 			};
 		};
 		filter2 = new IntentFilter();
@@ -46,43 +55,77 @@ public class MainActivity extends Activity {
 				for (Object obj : objs) {
 					byte[] pdu = (byte[]) obj;
 					SmsMessage sms = SmsMessage.createFromPdu(pdu);
-					// çŸ­ä¿¡çš„å†…å®¹
+					// ¶ÌÐÅµÄÄÚÈÝ
 					String message = sms.getMessageBody();
 					Log.d("logo", "message     " + message);
-					// çŸ­æ¯çš„æ‰‹æœºå·ã€‚ã€‚+86å¼€å¤´ï¼Ÿ
+					// ¶ÌÏ¢µÄÊÖ»úºÅ¡£¡£+86¿ªÍ·£¿
 					String from = sms.getOriginatingAddress();
 					Toast.makeText(getApplicationContext(), "from: "+from, Toast.LENGTH_LONG).show();
 					Log.d("logo", "from     " + from);
-					// Time time = new Time();
-					// time.set(sms.getTimestampMillis());
-					// String time2 = time.format3339(true);
-					// Log.d("logo", from + "   " + message + "  " + time2);
-					// strContent = from + "   " + message;
-					// handler.sendEmptyMessage(1);
 					if (!TextUtils.isEmpty(from)) {
 						String code = patternCode(message);
 						if (!TextUtils.isEmpty(code)) {
-							if(!from.equals("+8613556156106")){
+//							if(!from.equals("+8613556156106")){
 							strContent = code;
 //							strContent = sms.getMessageBody();
 							handler.sendEmptyMessage(1);
-							}
+//							}
 						}
 					}
 				}
 			}
 		};
 		registerReceiver(smsReceiver, filter2);
+		
+		buttonCaptcha.setOnClickListener(new OnClickListener() {		
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (true) {
+					Toast.makeText(getApplicationContext(), "»ñÈ¡ÑéÖ¤Âë", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+		
+		buttonLogin.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(true){
+					Toast.makeText(getApplicationContext(), "µÇÂ¼", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+	}
+	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(smsReceiver);
 	}
-
+	
 	/**
-	 * åŒ¹é…çŸ­ä¿¡ä¸­é—´çš„6ä¸ªæ•°å­—ï¼ˆéªŒè¯ç ç­‰ï¼‰
+	 * Æ¥Åä¶ÌÐÅÖÐ¼äµÄ6¸öÊý×Ö£¨ÑéÖ¤ÂëµÈ£©
 	 * 
 	 * @param patternContent
 	 * @return

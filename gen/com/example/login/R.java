@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.amybroadcastreceiver1;
+package com.example.login;
 
 public final class R {
     public static final class attr {
@@ -13,8 +13,9 @@ public final class R {
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
 
-         Customize dimensions originally defined in res/values/dimens.xml (such as
-         screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
+         Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
         public static final int activity_horizontal_margin=0x7f040000;
@@ -24,8 +25,21 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080001;
-        public static final int et=0x7f080000;
+        public static final int action_settings=0x7f08000e;
+        public static final int login_agree=0x7f08000c;
+        public static final int login_buttoncaptcha=0x7f080009;
+        public static final int login_captcha=0x7f080008;
+        public static final int login_editcaptcha=0x7f080007;
+        public static final int login_editphone=0x7f080004;
+        public static final int login_linearlayout=0x7f080001;
+        public static final int login_loginbutton=0x7f08000d;
+        public static final int login_phonenumber=0x7f080005;
+        public static final int login_radiobutton=0x7f08000b;
+        public static final int login_relativelayout1=0x7f080003;
+        public static final int login_relativelayout2=0x7f080006;
+        public static final int login_relativelayout3=0x7f08000a;
+        public static final int login_thoughLogin=0x7f080000;
+        public static final int thoughLogin=0x7f080002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -34,10 +48,15 @@ public final class R {
         public static final int main=0x7f070000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
+        public static final int action_settings=0x7f050002;
         public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050002;
-        public static final int smscontent=0x7f050003;
+        public static final int hello_world=0x7f050001;
+        public static final int login_agree=0x7f050008;
+        public static final int login_captcha=0x7f050006;
+        public static final int login_getcaptcha=0x7f050007;
+        public static final int login_login=0x7f050003;
+        public static final int login_phonenumber=0x7f050005;
+        public static final int login_thoughLogin=0x7f050004;
     }
     public static final class style {
         /** 
